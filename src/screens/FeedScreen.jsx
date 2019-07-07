@@ -4,7 +4,7 @@ import axios from 'axios';
 import { RECENT_MEDIA_URL } from '../constants';
 
 import { FeedItem } from '../components/FeedItem';
-import { LoadingScreen } from './LoadingScreen';
+import { Loading } from '../components/Loading';
 
 const keyExtractor = item => `feed-item-${item.id}`;
 
@@ -27,12 +27,12 @@ export const FeedScreen = props => {
     }
   };
 
-  useEffect(() => {
-    getRecentMedia();
-  }, []);
+  // useEffect(() => {
+  //   getRecentMedia();
+  // }, []);
 
   if (loading) {
-    return <LoadingScreen />;
+    return <Loading />;
   }
   if (!recentMedia) {
     return null;

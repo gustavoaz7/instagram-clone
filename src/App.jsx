@@ -1,4 +1,4 @@
 import React from 'react';
-import { FeedScreen } from './screens/FeedScreen';
+import { Routes } from './routes';
 
-export const App = () => <FeedScreen />;
+export const App = () => <Routes />;

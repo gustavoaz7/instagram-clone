@@ -2,7 +2,7 @@ import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import styled from 'styled-components/native';
 
-export const LoadingScreen = () => (
+export const Loading = () => (
   <Container>
     <ActivityIndicator size="large" />
   </Container>
