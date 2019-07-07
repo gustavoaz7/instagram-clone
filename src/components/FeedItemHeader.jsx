@@ -1,26 +1,23 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import propTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
+import { userType } from '../types';
 
 const AVATAR_SIZE = 36;
 
-export const FeedItemHeader = ({ username, image }) => (
+export const FeedItemHeader = ({ user }) => (
   <Container>
     <Row>
-      <Avatar resizeMode="cover" source={image} />
-      <Username>{username}</Username>
+      <Avatar resizeMode="cover" source={{ uri: user.profile_picture }} />
+      <Username>{user.username}</Username>
     </Row>
     <Feather name="more-horizontal" size={26} />
   </Container>
 );
 
 FeedItemHeader.propTypes = {
-  username: propTypes.string.isRequired,
-  image: propTypes.shape({
-    uri: propTypes.string.isRequired,
-  }).isRequired,
+  user: userType.isRequired,
 };
 
 const Row = styled(View)`

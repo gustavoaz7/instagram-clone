@@ -1,29 +1,39 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import propTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
+import { userType, captionType, likesType } from '../types';
 
 const ICON_SIZE = 26;
 
-export const FeedItemData = ({ username, description }) => (
-  <Container>
-    <Row>
+export const FeedItemData = ({ user, caption, likes }) => {
+  const likesText = `${likes.count} like${likes.count > 1 ? 's' : ''}`;
+  const captionText = (caption || {}).text;
+  return (
+    <Container>
       <Row>
-        <Icon size={ICON_SIZE} name="heart" />
-        <Icon size={ICON_SIZE} name="message-circle" />
-        <Icon size={ICON_SIZE} name="send" />
+        <Row>
+          <Icon size={ICON_SIZE} name="heart" />
+          <Icon size={ICON_SIZE} name="message-circle" />
+          <Icon size={ICON_SIZE} name="send" />
+        </Row>
+        <Icon size={ICON_SIZE} name="bookmark" />
       </Row>
-      <Icon size={ICON_SIZE} name="bookmark" />
-    </Row>
-    <Username>{username}</Username>
-    <Description>{description}</Description>
-  </Container>
-);
+      {!!likes.count && <Likes>{likesText}</Likes>}
+      {!!captionText && (
+        <Text>
+          <Username>{`${user.username} `}</Username>
+          {captionText}
+        </Text>
+      )}
+    </Container>
+  );
+};
 
 FeedItemData.propTypes = {
-  username: propTypes.string.isRequired,
-  description: propTypes.string.isRequired,
+  user: userType.isRequired,
+  caption: captionType,
+  likes: likesType.isRequired,
 };
 
 const Container = styled(View)`
@@ -40,10 +50,8 @@ const Icon = styled(Feather)`
   margin-right: 10px;
 `;
 
-const Username = styled(Text)`
+const Semibold = styled(Text)`
   font-weight: 600;
 `;
-
-const Description = styled(Text)`
-  color: #666;
-`;
+const Username = styled(Semibold)``;
+const Likes = styled(Semibold)``;

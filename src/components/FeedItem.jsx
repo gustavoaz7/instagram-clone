@@ -1,14 +1,13 @@
 import React, { Fragment } from 'react';
 import { Image } from 'react-native';
-import { feedItemMock } from '../mocks/feedItemMock';
 import { FeedItemHeader as Header } from './FeedItemHeader';
 import { FeedItemData as PostData } from './FeedItemData';
+import { userType, imageType, captionType, likesType } from '../types';
 
-export const FeedItem = () => {
-  const { username, image, description } = feedItemMock;
+export const FeedItem = ({ user, images, caption, likes }) => {
   return (
     <Fragment>
-      <Header image={{ uri: image }} username={username} />
+      <Header user={user} />
       <Image
         resizeMode="cover"
         style={{
@@ -16,9 +15,16 @@ export const FeedItem = () => {
           width: '100%',
           height: 400,
         }}
-        source={{ uri: image }}
+        source={{ uri: images.standard_resolution.url }}
       />
-      <PostData username={username} description={description} />
+      <PostData user={user} caption={caption} likes={likes} />
     </Fragment>
   );
+};
+
+FeedItem.propTypes = {
+  user: userType.isRequired,
+  images: imageType.isRequired,
+  caption: captionType,
+  likes: likesType.isRequired,
 };
