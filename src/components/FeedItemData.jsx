@@ -1,14 +1,31 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
+import ParsedText from 'react-native-parsed-text';
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
-import { userType, captionType, likesType } from '../types';
+import { userType, captionType, likesType, tagsType } from '../types';
+import { ALERT_MESSAGE } from '../constants';
 
 const ICON_SIZE = 26;
 
-export const FeedItemData = ({ user, caption, likes }) => {
+const styles = StyleSheet.create({
+  tag: {
+    color: '#003569',
+  },
+});
+
+const handleTagPress = hashtag => {
+  Alert.alert(`Search for ${hashtag}`, ALERT_MESSAGE, [{ text: 'OK' }]);
+};
+
+export const FeedItemData = ({ user, caption, likes, tags }) => {
   const likesText = `${likes.count} like${likes.count > 1 ? 's' : ''}`;
   const captionText = (caption || {}).text;
+  const parseRules = tags.map(tag => ({
+    pattern: new RegExp(`#${tag}`, 'g'),
+    style: styles.tag,
+    onPress: handleTagPress,
+  }));
   return (
     <Container>
       <Row>
@@ -23,7 +40,7 @@ export const FeedItemData = ({ user, caption, likes }) => {
       {!!captionText && (
         <Text>
           <Username>{`${user.username} `}</Username>
-          {captionText}
+          <ParsedText parse={parseRules}>{captionText}</ParsedText>
         </Text>
       )}
     </Container>
@@ -34,6 +51,7 @@ FeedItemData.propTypes = {
   user: userType.isRequired,
   caption: captionType,
   likes: likesType.isRequired,
+  tags: tagsType.isRequired,
 };
 
 const Container = styled(View)`

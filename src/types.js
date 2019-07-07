@@ -26,6 +26,8 @@ export const imageType = propTypes.shape({
   standard_resolution: imageInfo.isRequired,
 });
 
+export const tagsType = propTypes.arrayOf(propTypes.string);
+
 const count = propTypes.shape({
   count: propTypes.number.isRequired,
 });

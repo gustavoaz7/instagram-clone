@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import { Image } from 'react-native';
 import { FeedItemHeader as Header } from './FeedItemHeader';
 import { FeedItemData as PostData } from './FeedItemData';
-import { userType, imageType, captionType, likesType } from '../types';
+import { userType, imageType, captionType, likesType, tagsType } from '../types';
 
-export const FeedItem = ({ user, images, caption, likes }) => {
+export const FeedItem = ({ user, images, caption, likes, tags }) => {
   return (
     <Fragment>
       <Header user={user} />
@@ -17,7 +17,7 @@ export const FeedItem = ({ user, images, caption, likes }) => {
         }}
         source={{ uri: images.standard_resolution.url }}
       />
-      <PostData user={user} caption={caption} likes={likes} />
+      <PostData user={user} caption={caption} likes={likes} tags={tags} />
     </Fragment>
   );
 };
@@ -27,4 +27,5 @@ FeedItem.propTypes = {
   images: imageType.isRequired,
   caption: captionType,
   likes: likesType.isRequired,
+  tags: tagsType.isRequired,
 };
