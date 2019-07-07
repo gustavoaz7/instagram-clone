@@ -1,4 +1,4 @@
 import React from 'react';
-import { FeedItem } from './components/FeedItem';
+import { FeedScreen } from './screens/FeedScreen';
 
-export const App = () => <FeedItem />;
+export const App = () => <FeedScreen />;
