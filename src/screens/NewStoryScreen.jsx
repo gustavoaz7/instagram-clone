@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StatusBar, TouchableOpacity, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import * as Permissions from 'expo-permissions';
 import { Camera } from 'expo-camera';
 
+const DESIRED_RATIO = '16:9';
 let navigationFocusListener;
 let navigationBlurListener;
 
@@ -13,6 +14,7 @@ export function NewStoryScreen(props) {
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   // eslint-disable-next-line
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [cameraRatio, setCameraRatio] = useState(null);
 
   const getCameraPermission = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -42,10 +44,18 @@ export function NewStoryScreen(props) {
     );
   };
 
+  const prepareRatio = async () => {
+    if (Platform.OS === 'android' && cameraRef.current) {
+      const ratios = await cameraRef.current.getSupportedRatiosAsync();
+      const ratio = ratios.find(r => r === DESIRED_RATIO) || ratios[ratios.length - 1];
+      setCameraRatio(ratio);
+    }
+  };
+
   return (
     <Container>
       <StatusBar hidden={hideStatusBar} animated showHideTransition="slide" />
-      <CameraUI ref={cameraRef} type={cameraType}>
+      <CameraUI ref={cameraRef} type={cameraType} onCameraReady={prepareRatio} ratio={cameraRatio}>
         <TouchableOpacity
           style={{
             alignItems: 'center',
