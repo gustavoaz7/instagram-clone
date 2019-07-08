@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View, Image } from 'react-native';
 import axios from 'axios';
+import styled from 'styled-components/native';
+import { Feather } from '@expo/vector-icons';
 import { RECENT_MEDIA_URL } from '../constants';
+import instagramLogo from '../../assets/logo.png';
 
 import { FeedItem } from '../components/FeedItem';
 import { Loading } from '../components/Loading';
@@ -27,9 +30,9 @@ export const FeedScreen = props => {
     }
   };
 
-  // useEffect(() => {
-  //   getRecentMedia();
-  // }, []);
+  useEffect(() => {
+    getRecentMedia();
+  }, []);
 
   if (loading) {
     return <Loading />;
@@ -40,3 +43,37 @@ export const FeedScreen = props => {
 
   return <FlatList keyExtractor={keyExtractor} data={recentMedia} renderItem={renderItem} />;
 };
+
+export function createFeedScreenHeaderLeft() {
+  return (
+    <HeaderLeft>
+      <Feather name="instagram" size={24} />
+      <Space />
+      <Image source={instagramLogo} />
+    </HeaderLeft>
+  );
+}
+
+export function createFeedScreenHeaderRight() {
+  return (
+    <HeaderRight>
+      <Feather name="tv" size={24} />
+      <Space />
+      <Feather name="send" size={24} />
+    </HeaderRight>
+  );
+}
+
+const HeaderLeft = styled(View)`
+  flex-direction: row;
+  margin-left: 10px;
+`;
+
+const HeaderRight = styled(View)`
+  flex-direction: row;
+  margin-right: 10px;
+`;
+
+const Space = styled(View)`
+  width: 10px;
+`;
