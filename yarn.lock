@@ -2466,7 +2466,7 @@ expo-calendar@~5.0.1:
   resolved "https://registry.yarnpkg.com/expo-calendar/-/expo-calendar-5.0.1.tgz#52660f08d3a41109080ecfb2ee7ebbcd9f67c071"
   integrity sha512-muMxE5W7itpTmsveuEQwRD6bDi5ccDBxkiFNEsqOYheVzAQA55XwIad5a7PrZ4tT4QfeEVvhR1+mE+ShdWqCmw==
 
-expo-camera@~5.0.1:
+expo-camera@^5.0.1, expo-camera@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-5.0.1.tgz#1c90cda9e368148dbf538d14bd047cdf33ea3350"
   integrity sha512-FlgTV6dubDE1IMRKiOipTl2uH1eCravcFDfUQlQaxIlz73YEilZhJT7MAentq8VLJoYXsD99F3TfGcIltMA46Q==
@@ -2613,7 +2613,7 @@ expo-payments-stripe@~5.0.1:
   resolved "https://registry.yarnpkg.com/expo-payments-stripe/-/expo-payments-stripe-5.0.1.tgz#da096cf81fc03dbfd540ce6814cc67222d7447ff"
   integrity sha512-U1SP9QPrCUUgYURGysUsQN1VEHs88ok+vTd30vsdbKq3TkguIPc0HuL/p2VE48KpVuykLKTmD4j9Ey56qUUiLg==
 
-expo-permissions@~5.0.1:
+expo-permissions@^5.0.1, expo-permissions@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-5.0.1.tgz#cc6af49a37ea3ab73e780a8a19f22b7662379941"
   integrity sha512-cOg9f9TaV8grORTwLSuoPfviDGcJSALjaALvxdmQD5ujPW6lxO6Ofd/s4/dV4L3lJww4HXiurjPJnT5yo+3ydw==
