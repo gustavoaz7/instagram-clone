@@ -32,10 +32,26 @@ export function createDirectScreenHeaderLeft() {
   );
 }
 
+export function createDirectScreenBottomNav() {
+  return (
+    <Row>
+      <Feather name="camera" size={24} color="#2c82c9" />
+      <BottomNavLabel>Camera</BottomNavLabel>
+    </Row>
+  );
+}
+
 const Row = styled(View)`
   flex-direction: row;
 `;
 
 const Space = styled(View)`
   width: 10px;
+`;
+
+const BottomNavLabel = styled(Text)`
+  color: #2c82c9;
+  font-weight: bold;
+  align-self: center;
+  margin-left: 6px;
 `;

@@ -19,6 +19,7 @@ import {
   DirectScreen,
   createDirectScreenHeaderRight,
   createDirectScreenHeaderLeft,
+  createDirectScreenBottomNav,
 } from './screens/DirectScreen';
 
 const bottomTabStyle = { backgroundColor: '#fafafa' };
@@ -74,9 +75,26 @@ const HomeStackNavigator = createStackNavigator({
   },
 });
 
+const DirectBottomNavigator = createBottomTabNavigator(
+  {
+    Direct: {
+      screen: DirectScreen,
+      navigationOptions: {
+        tabBarIcon: createDirectScreenBottomNav(),
+      },
+    },
+  },
+  {
+    tabBarOptions: {
+      showLabel: false,
+      style: bottomTabStyle,
+    },
+  },
+);
+
 const DirectStackNavigator = createStackNavigator({
   Direct: {
-    screen: DirectScreen,
+    screen: DirectBottomNavigator,
     navigationOptions: {
       headerTitle: 'Direct',
       headerRight: createDirectScreenHeaderRight(),
