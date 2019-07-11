@@ -15,9 +15,15 @@ import { SelectPhotoScreen } from './screens/SelectPhotoScreen';
 import { ActivityScreen } from './screens/ActivityScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
 import { NewStoryScreen } from './screens/NewStoryScreen';
-import { DirectScreen } from './screens/DirectScreen';
+import {
+  DirectScreen,
+  createDirectScreenHeaderRight,
+  createDirectScreenHeaderLeft,
+} from './screens/DirectScreen';
 
-const bottomTabNavigator = createBottomTabNavigator(
+const bottomTabStyle = { backgroundColor: '#fafafa' };
+
+const MainBottomTabNavigator = createBottomTabNavigator(
   {
     Feed: {
       screen: FeedScreen,
@@ -53,16 +59,28 @@ const bottomTabNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       showLabel: false,
+      style: bottomTabStyle,
     },
   },
 );
 
-const homeStackNavigator = createStackNavigator({
+const HomeStackNavigator = createStackNavigator({
   Main: {
-    screen: bottomTabNavigator,
+    screen: MainBottomTabNavigator,
     navigationOptions: {
       headerLeft: createFeedScreenHeaderLeft(),
       headerRight: createFeedScreenHeaderRight(),
+    },
+  },
+});
+
+const DirectStackNavigator = createStackNavigator({
+  Direct: {
+    screen: DirectScreen,
+    navigationOptions: {
+      headerTitle: 'Direct',
+      headerRight: createDirectScreenHeaderRight(),
+      headerLeft: createDirectScreenHeaderLeft(),
     },
   },
 });
@@ -76,11 +94,11 @@ const topTabNavigator = createMaterialTopTabNavigator(
       navigationOptions: hideTabBar,
     },
     Home: {
-      screen: homeStackNavigator,
+      screen: HomeStackNavigator,
       navigationOptions: hideTabBar,
     },
     Direct: {
-      screen: DirectScreen,
+      screen: DirectStackNavigator,
       navigationOptions: hideTabBar,
     },
   },
