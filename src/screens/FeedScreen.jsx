@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { FlatList, View, Image } from 'react-native';
 import axios from 'axios';
 import styled from 'styled-components/native';
@@ -8,6 +8,7 @@ import instagramLogo from '../../assets/logo.png';
 
 import { FeedItem } from '../components/FeedItem';
 import { Loading } from '../components/Loading';
+import { StoriesList } from '../components/StoriesList';
 
 const keyExtractor = item => `feed-item-${item.id}`;
 
@@ -41,7 +42,12 @@ export const FeedScreen = props => {
     return null;
   }
 
-  return <FlatList keyExtractor={keyExtractor} data={recentMedia} renderItem={renderItem} />;
+  return (
+    <Fragment>
+      <StoriesList />
+      <FlatList keyExtractor={keyExtractor} data={recentMedia} renderItem={renderItem} />
+    </Fragment>
+  );
 };
 
 export function createFeedScreenHeaderLeft() {
