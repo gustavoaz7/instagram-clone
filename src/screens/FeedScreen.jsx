@@ -42,9 +42,11 @@ export const FeedScreen = props => {
     return null;
   }
 
+  const { user } = recentMedia[0];
+
   return (
     <Fragment>
-      <StoriesList />
+      <StoriesList user={user} />
       <FlatList keyExtractor={keyExtractor} data={recentMedia} renderItem={renderItem} />
     </Fragment>
   );
