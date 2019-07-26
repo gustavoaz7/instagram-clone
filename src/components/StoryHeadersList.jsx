@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import propTypes from 'prop-types';
 import faker from 'faker';
-import { StoryItem } from './StoryItem';
+import { StoryHeader } from './StoryHeader';
 import { userType } from '../types';
 import { createFriends } from '../helpers/faker';
 
-export const StoriesList = ({ self, user }) => {
+export const StoryHeadersList = ({ self, user }) => {
   const [fakeFriends, setFakeFriends] = useState([]);
 
   useEffect(() => {
@@ -23,17 +23,17 @@ export const StoriesList = ({ self, user }) => {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ marginVertical: 10 }}
+      contentContainerStyle={{ paddingHorizontal: 6 }}
     >
-      <StoryItem self={self} user={user} />
+      <StoryHeader self={self} user={user} stories={[]} />
       {fakeFriends.map(friend => (
-        <StoryItem key={friend.user.id} user={friend.user} />
+        <StoryHeader key={friend.user.id} user={friend.user} />
       ))}
     </ScrollView>
   );
 };
 
-StoriesList.propTypes = {
+StoryHeadersList.propTypes = {
   self: propTypes.bool,
   user: userType.isRequired,
 };

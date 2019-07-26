@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import { FlatList, View, Image } from 'react-native';
 import axios from 'axios';
 import styled from 'styled-components/native';
@@ -8,7 +8,7 @@ import instagramLogo from '../../assets/logo.png';
 
 import { FeedItem } from '../components/FeedItem';
 import { Loading } from '../components/Loading';
-import { StoriesList } from '../components/StoriesList';
+import { StoryHeadersList } from '../components/StoryHeadersList';
 
 const keyExtractor = item => `feed-item-${item.id}`;
 
@@ -19,7 +19,7 @@ export const FeedScreen = props => {
   const [recentMedia, setRecentMedia] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const getRecentMedia = async () => {
+  const getRecentMedia = useCallback(async () => {
     try {
       const { data } = await axios.get(RECENT_MEDIA_URL);
       setRecentMedia(data.data);
@@ -29,7 +29,7 @@ export const FeedScreen = props => {
       // TODO: Hnadle error case
       console.warn('!!getRecentMedia error: ', e);
     }
-  };
+  });
 
   useEffect(() => {
     getRecentMedia();
@@ -46,7 +46,7 @@ export const FeedScreen = props => {
 
   return (
     <Fragment>
-      <StoriesList user={user} />
+      <StoryHeadersList user={user} />
       <FlatList keyExtractor={keyExtractor} data={recentMedia} renderItem={renderItem} />
     </Fragment>
   );
