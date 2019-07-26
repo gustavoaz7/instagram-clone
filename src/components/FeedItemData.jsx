@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { userType, captionType, likesType, tagsType } from '../types';
 import { ALERT_MESSAGE } from '../constants';
+import { addPluralS } from '../helpers/text';
 
 const ICON_SIZE = 26;
 
@@ -19,7 +20,7 @@ const handleTagPress = hashtag => {
 };
 
 export const FeedItemData = ({ user, caption, likes, tags }) => {
-  const likesText = `${likes.count} like${likes.count > 1 ? 's' : ''}`;
+  const likesText = `${likes.count} ${addPluralS('like', likes.count)}`;
   const captionText = (caption || {}).text;
   const parseRules = tags.map(tag => ({
     pattern: new RegExp(`#${tag}`, 'g'),
