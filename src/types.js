@@ -5,6 +5,15 @@ export const userType = propTypes.shape({
   full_name: propTypes.string.isRequired,
   profile_picture: propTypes.string.isRequired,
   username: propTypes.string.isRequired,
+
+  bio: propTypes.string,
+  website: propTypes.string,
+  is_business: propTypes.bool,
+  counts: propTypes.shape({
+    media: propTypes.number.isRequired,
+    follows: propTypes.number.isRequired,
+    followed_by: propTypes.number.isRequired,
+  }),
 });
 
 export const captionType = propTypes.shape({
@@ -35,3 +44,5 @@ const count = propTypes.shape({
 export const likesType = count;
 
 export const commentsType = count;
+
+export const storiesType = propTypes.arrayOf(propTypes.string);
